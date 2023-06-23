@@ -8,9 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var imageFilePath: String = "/Users/menrfa/Downloads/FzFDzP8XsA4kNAQ.jpeg"
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack(alignment: .leading) {
+            TextField(
+                imageFilePath,
+                text: $imageFilePath)
+            
+            Button(
+                "Update",
+                action: {self.setBackground(imageFilePath: imageFilePath)}
+            )
+        }
+        .padding()
+    }
+    
+    
+    func setBackground(imageFilePath: String) {
+        do {
+            let imageURL = URL(fileURLWithPath: imageFilePath)
+            if let screen = NSScreen.main {
+                try NSWorkspace.shared.setDesktopImageURL(imageURL, for: screen, options: [:])
+            }
+        } catch {
+            print(error)
+        }
     }
 }
 
