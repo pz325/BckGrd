@@ -81,28 +81,11 @@ struct ContentView: View {
         isTimerRunning = true
         
         DispatchQueue.global(qos: .background).async {
-            sleep(10) // Simulating a 10-second timeout
+            sleep(5) // Simulating a 10-second timeout
             
             DispatchQueue.main.async {
-                sendNotification()
+                sendNotification(title: "hi", body: "content")
                 isTimerRunning = false
-            }
-        }
-    }
-    
-    func sendNotification() {
-        let center = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Timer Finished"
-        content.body = "The timer you started has finished."
-        content.sound = UNNotificationSound.default
-        
-        let request = UNNotificationRequest(identifier: "timerNotification", content: content, trigger: nil)
-        
-        center.add(request) { error in
-            if let error = error {
-                print(error.localizedDescription)
             }
         }
     }
