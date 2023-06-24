@@ -69,11 +69,14 @@ func downloadRandomImage(imageUrlString: String, completion: @escaping (String) 
         do {
             // Save the image to local drive
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let destinationURL = documentsDirectory.appendingPathComponent("wallpaper.jpg")
+            
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsDirectory, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            for url in fileURLs {
+                try? FileManager.default.removeItem(at: url)
+            }
+            
+            let destinationURL = documentsDirectory.appendingPathComponent("wallpaper\(UUID().uuidString).jpg")
             logMessage(destinationURL.absoluteString)
-            
-            try? FileManager.default.removeItem(at: destinationURL)
-            
             let imageData = try Data(contentsOf: imageTempFileUrl)
             try imageData.write(to: destinationURL)
             
