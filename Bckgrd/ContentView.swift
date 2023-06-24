@@ -32,12 +32,21 @@ struct ContentView: View {
             Button("Start Timer") {
                 startTimer()
             }
+            
+            Button("Set random background"){
+                getRandomImageUrl {
+                    imageUrl in downloadRandomImage(imageUrlString: imageUrl) {
+                        imageFilePath in setBackground(imageFilePath: imageFilePath)
+                    }
+                }
+            }
         }
         .padding()
     }
     
     
     func setBackground(imageFilePath: String) {
+        print("Setting background to \(imageFilePath)")
         do {
             let imageURL = URL(fileURLWithPath: imageFilePath)
             if let screen = NSScreen.main {

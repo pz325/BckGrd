@@ -15,6 +15,8 @@
 		6039A2FE2A42F3580065F463 /* BckgrdUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A2FD2A42F3580065F463 /* BckgrdUITests.swift */; };
 		6039A3002A42F3580065F463 /* BckgrdUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039A2FF2A42F3580065F463 /* BckgrdUITestsLaunchTests.swift */; };
 		607D7DD62A45CA5C00FA20CA /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD52A45CA5C00FA20CA /* Notification.swift */; };
+		607D7DD82A46B85B00FA20CA /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD72A46B85B00FA20CA /* Unsplash.swift */; };
+		607D7DDA2A46C67100FA20CA /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD92A46C67100FA20CA /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		6039A2FD2A42F3580065F463 /* BckgrdUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BckgrdUITests.swift; sourceTree = "<group>"; };
 		6039A2FF2A42F3580065F463 /* BckgrdUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BckgrdUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		607D7DD52A45CA5C00FA20CA /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		607D7DD72A46B85B00FA20CA /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
+		607D7DD92A46C67100FA20CA /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				6039A2E12A42F3570065F463 /* BckgrdApp.swift */,
+				607D7DD72A46B85B00FA20CA /* Unsplash.swift */,
 				6039A2E32A42F3570065F463 /* ContentView.swift */,
 				607D7DD52A45CA5C00FA20CA /* Notification.swift */,
 				6039A2E52A42F3580065F463 /* Assets.xcassets */,
 				6039A2EA2A42F3580065F463 /* Bckgrd.entitlements */,
 				6039A2E72A42F3580065F463 /* Preview Content */,
+				607D7DD92A46C67100FA20CA /* Common.swift */,
 			);
 			path = Bckgrd;
 			sourceTree = "<group>";
@@ -265,6 +271,8 @@
 				6039A2E42A42F3570065F463 /* ContentView.swift in Sources */,
 				6039A2E22A42F3570065F463 /* BckgrdApp.swift in Sources */,
 				607D7DD62A45CA5C00FA20CA /* Notification.swift in Sources */,
+				607D7DDA2A46C67100FA20CA /* Common.swift in Sources */,
+				607D7DD82A46B85B00FA20CA /* Unsplash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
