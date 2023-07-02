@@ -9,6 +9,42 @@ import SwiftUI
 
 import UserNotifications
 
+class StatusMenuController: NSObject, NSMenuDelegate {
+    
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    var statusMenu: NSMenu!
+    
+    override init() {
+        super.init()
+        
+        statusMenu = NSMenu()
+        statusMenu.delegate = self
+        
+        statusMenu.addItem(NSMenuItem(title: "Button 1", action: #selector(button1Clicked), keyEquivalent: ""))
+        statusMenu.addItem(NSMenuItem(title: "Button 2", action: #selector(button2Clicked), keyEquivalent: ""))
+        statusMenu.addItem(NSMenuItem.separator())
+        statusMenu.addItem(NSMenuItem(title: "Quit", action: #selector(quitClicked), keyEquivalent: "q"))
+        
+        statusItem.menu = statusMenu
+        if let button = statusItem.button {
+            button.image = NSImage(systemSymbolName: "app", accessibilityDescription: nil)
+        }
+    }
+    
+    @objc func button1Clicked() {
+        print("Button 1 clicked")
+    }
+    
+    @objc func button2Clicked() {
+        print("Button 2 clicked")
+    }
+    
+    @objc func quitClicked() {
+        NSApplication.shared.terminate(self)
+    }
+}
+
+
 struct ContentView: View {
     @State private var imageFilePath: String = "/Users/menrfa/Downloads/FzFDzP8XsA4kNAQ.jpeg"
     @State private var isTimerRunning = false
@@ -18,6 +54,19 @@ struct ContentView: View {
             TextField(
                 imageFilePath,
                 text: $imageFilePath)
+                .onAppear {
+                    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.screensDidWakeNotification, object: nil, queue: nil) { _ in
+                        print("Lid opened")
+                    }
+                    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.screensDidSleepNotification, object: nil, queue: nil) { _ in
+                        print("Lid closed")
+                        getRandomImageUrl {
+                            imageUrl in downloadRandomImage(imageUrlString: imageUrl) {
+                                imageFilePath in setBackground(imageFilePath: imageFilePath)
+                            }
+                        }
+                    }
+                }
             
             Button(
                 "Update",
@@ -69,8 +118,8 @@ struct ContentView: View {
     
     func scheduleNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "New Message"
-        content.body = "You have received a new message."
+        content.title = "今天天气挺好的"
+        content.body = "一起睡觉吧"
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -105,3 +154,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
