@@ -24,7 +24,7 @@ struct UnsplashURLs: Codable {
 
 func getRandomImageUrl(completion: @escaping (String) -> Void) {
     // Make API request to Unsplash to get a random photo
-    let urlString = "https://api.unsplash.com/photos/random?client_id=\(Unsplash.accessKey)"
+    let urlString = "https://api.unsplash.com/photos/random?query=wallpaper&orientation=landscape&client_id=\(Unsplash.accessKey)"
     guard let url = URL(string: urlString) else {
         return
     }
