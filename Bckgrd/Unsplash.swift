@@ -10,7 +10,6 @@ import Foundation
 struct Unsplash {
     static let url: String = "https://api.unsplash.com/"
     static let accessKey: String = "rgh1m8W94nh9D-FTbfJhE-gAnidjwK3qAOniiO2mrf0"
-    static let secretKey: String = "HY4g-_gKSuC1aBYMBOBzTtki0byB50lAAf9dwyUIlvA"
     static let version:String = "v1"
 }
 
