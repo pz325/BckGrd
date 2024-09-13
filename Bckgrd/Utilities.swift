@@ -50,4 +50,12 @@ struct Utilities {
             }
         }
     }
+    
+    static func setRandomBackground() {
+        UnsplashUtilities.getRandomImageUrl {
+            imageUrl in UnsplashUtilities.downloadRandomImage(imageUrlString: imageUrl) {
+                imageFilePath in Utilities.setBackground(imageFilePath: imageFilePath)
+            }
+        }
+    }
 }

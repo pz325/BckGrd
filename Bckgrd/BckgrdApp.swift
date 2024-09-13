@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         let menu = NSMenu()
         
-        let showWindowItem = NSMenuItem(title: "Change", action: nil, keyEquivalent: "")
+        let showWindowItem = NSMenuItem(title: "Change", action: #selector(setRandomBackground), keyEquivalent: "c")
         menu.addItem(showWindowItem)
         
         menu.addItem(NSMenuItem.separator())
@@ -32,6 +32,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem?.button {
             button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "Status Icon")
         }
+    }
+    
+    @objc func setRandomBackground() {
+        Utilities.setRandomBackground()
     }
     
     private func requestNotificationPermission() {

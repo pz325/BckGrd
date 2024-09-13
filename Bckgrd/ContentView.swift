@@ -31,11 +31,7 @@ struct ContentView: View {
             }
             
             Button("Set random background"){
-                UnsplashUtilities.getRandomImageUrl {
-                    imageUrl in UnsplashUtilities.downloadRandomImage(imageUrlString: imageUrl) {
-                        imageFilePath in Utilities.setBackground(imageFilePath: imageFilePath)
-                    }
-                }
+                Utilities.setRandomBackground()
             }
         }
         .padding()
