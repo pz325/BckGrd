@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import UserNotifications
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        setupStatusItem()
+        requestNotificationPermission()
+    }
+    
+    private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         let menu = NSMenu()
         
@@ -24,6 +31,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem?.menu = menu
         if let button = statusItem?.button {
             button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "Status Icon")
+        }
+    }
+    
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Notification permission granted: \(granted)")
+            } else if let error = error {
+                print("Error requesting notification permission: \(error.localizedDescription)")
+            }
         }
     }
 }
