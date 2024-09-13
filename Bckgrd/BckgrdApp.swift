@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         requestNotificationPermission()
-        Utilities.dispatchDailyQuote()
+        DailyQuote.scheduleDailyNotification()
     }
     
     private func setupStatusItem() {

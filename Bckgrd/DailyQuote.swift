@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 struct DailyQuote {
     static func fetch(completion: @escaping (String?) -> Void) {
@@ -24,6 +25,29 @@ struct DailyQuote {
                 completion(nil)
             }
         }.resume()
+    }
+    
+    static func scheduleDailyNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                let content = UNMutableNotificationContent()
+                content.title = "Daily Quote"
+                content.body = "Your daily quote is ready!"
+                
+                var dateComponents = DateComponents()
+                dateComponents.hour = 12
+                dateComponents.minute = 0
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: "dailyQuote", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error = error {
+                        print("Error scheduling notification: \(error)")
+                    }
+                }
+            }
+        }
     }
 }
 
