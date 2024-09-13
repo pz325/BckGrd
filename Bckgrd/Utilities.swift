@@ -35,6 +35,7 @@ struct Utilities {
     }
 
     static func sendNotification(title:String, body:String) {
+        logMessage("Sending notification \(title) \(body)")
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -56,6 +57,12 @@ struct Utilities {
             imageUrl in UnsplashUtilities.downloadRandomImage(imageUrlString: imageUrl) {
                 imageFilePath in Utilities.setBackground(imageFilePath: imageFilePath)
             }
+        }
+    }
+
+    static func dispatchDailyQuote() {
+        DailyQuote.fetch { quote in
+            Utilities.sendNotification(title: "每日金句", body: quote!)
         }
     }
 }

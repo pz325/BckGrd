@@ -18,19 +18,19 @@ struct ContentView: View {
                 
             
             Button(
-                "Change background",
+                "改变桌面背景",
                 action: {Utilities.setBackground(imageFilePath: imageFilePath)}
             )
             
-            Button("Send Notification") {
-                Utilities.scheduleNotification()
+            Button("每日金句") {
+                Utilities.dispatchDailyQuote()
             }
             
             Button("Start Timer") {
                 startTimerWithNotification()
             }
             
-            Button("Set random background"){
+            Button("随机改变桌面背景"){
                 Utilities.setRandomBackground()
             }
         }

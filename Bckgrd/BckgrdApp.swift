@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         requestNotificationPermission()
-        scheduleDailyQuote()
+        Utilities.dispatchDailyQuote()
     }
     
     private func setupStatusItem() {
@@ -46,15 +46,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             } else if let error = error {
                 print("Error requesting notification permission: \(error.localizedDescription)")
             }
-        }
-    }
-    
-    private func scheduleDailyQuote() {
-        let content = UNMutableNotificationContent()
-        content.title = "Daily Quote"
-        
-        DailyQuote.fetch { quote in
-            Utilities.sendNotification(title: "Daily Quote", body: quote!)
         }
     }
 }
