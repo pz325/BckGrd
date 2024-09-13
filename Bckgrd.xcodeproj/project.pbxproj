@@ -17,6 +17,7 @@
 		607D7DD62A45CA5C00FA20CA /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD52A45CA5C00FA20CA /* Notification.swift */; };
 		607D7DD82A46B85B00FA20CA /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD72A46B85B00FA20CA /* Unsplash.swift */; };
 		607D7DDA2A46C67100FA20CA /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D7DD92A46C67100FA20CA /* Common.swift */; };
+		609CF3D92C94154600BE5D61 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CF3D82C94154600BE5D61 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		607D7DD52A45CA5C00FA20CA /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		607D7DD72A46B85B00FA20CA /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
 		607D7DD92A46C67100FA20CA /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		609CF3D82C94154600BE5D61 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		6039A2E02A42F3570065F463 /* Bckgrd */ = {
 			isa = PBXGroup;
 			children = (
+				609CF3D82C94154600BE5D61 /* Utilities.swift */,
 				6039A2E12A42F3570065F463 /* BckgrdApp.swift */,
 				607D7DD72A46B85B00FA20CA /* Unsplash.swift */,
 				6039A2E32A42F3570065F463 /* ContentView.swift */,
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609CF3D92C94154600BE5D61 /* Utilities.swift in Sources */,
 				6039A2E42A42F3570065F463 /* ContentView.swift in Sources */,
 				6039A2E22A42F3570065F463 /* BckgrdApp.swift in Sources */,
 				607D7DD62A45CA5C00FA20CA /* Notification.swift in Sources */,

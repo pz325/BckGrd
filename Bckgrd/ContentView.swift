@@ -9,52 +9,40 @@ import SwiftUI
 
 import UserNotifications
 
-class StatusMenuController: NSObject, NSMenuDelegate {
-    
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    var statusMenu: NSMenu!
-    
-    override init() {
-        super.init()
-        
-        statusMenu = NSMenu()
-        statusMenu.delegate = self
-        
-        statusMenu.addItem(NSMenuItem(title: "Button 1", action: #selector(button1Clicked), keyEquivalent: ""))
-        statusMenu.addItem(NSMenuItem(title: "Button 2", action: #selector(button2Clicked), keyEquivalent: ""))
-        statusMenu.addItem(NSMenuItem.separator())
-        statusMenu.addItem(NSMenuItem(title: "Quit", action: #selector(quitClicked), keyEquivalent: "q"))
-        
-        statusItem.menu = statusMenu
-        if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "app", accessibilityDescription: nil)
-        }
-    }
-    
-    @objc func button1Clicked() {
-        print("Button 1 clicked")
-    }
-    
-    @objc func button2Clicked() {
-        print("Button 2 clicked")
-    }
-    
-    @objc func quitClicked() {
-        NSApplication.shared.terminate(self)
-    }
-}
-
-
 struct ContentView: View {
     @State private var imageFilePath: String = "/Users/menrfa/Downloads/FzFDzP8XsA4kNAQ.jpeg"
-    @State private var isTimerRunning = false
     
     var body: some View {
         VStack(alignment: .leading) {
             TextField(
                 imageFilePath,
                 text: $imageFilePath)
-                .onAppear {
+                
+            
+            Button(
+                "Change background",
+                action: {self.setBackground(imageFilePath: imageFilePath)}
+            )
+            
+            Button("Send Notification") {
+                requestNotificationPermission()
+                scheduleNotification()
+            }
+            
+            Button("Start Timer") {
+                startTimerWithNotification()
+            }
+            
+            Button("Set random background"){
+                getRandomImageUrl {
+                    imageUrl in downloadRandomImage(imageUrlString: imageUrl) {
+                        imageFilePath in setBackground(imageFilePath: imageFilePath)
+                    }
+                }
+            }
+        }
+        .padding()
+        .onAppear {
                     NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.screensDidWakeNotification, object: nil, queue: nil) { _ in
                         print("Lid opened")
                     }
@@ -67,32 +55,7 @@ struct ContentView: View {
                         }
                     }
                 }
-            
-            Button(
-                "Update",
-                action: {self.setBackground(imageFilePath: imageFilePath)}
-            )
-            
-            Button("Send Notification") {
-                requestNotificationPermission()
-                scheduleNotification()
-            }
-            
-            Button("Start Timer") {
-                startTimer()
-            }
-            
-            Button("Set random background"){
-                getRandomImageUrl {
-                    imageUrl in downloadRandomImage(imageUrlString: imageUrl) {
-                        imageFilePath in setBackground(imageFilePath: imageFilePath)
-                    }
-                }
-            }
-        }
-        .padding()
     }
-    
     
     func setBackground(imageFilePath: String) {
         print("Setting background to \(imageFilePath)")
@@ -134,17 +97,9 @@ struct ContentView: View {
         }
     }
     
-    
-    func startTimer() {
-        isTimerRunning = true
-        
-        DispatchQueue.global(qos: .background).async {
-            sleep(5) // Simulating a 10-second timeout
-            
-            DispatchQueue.main.async {
-                sendNotification(title: "hi", body: "content")
-                isTimerRunning = false
-            }
+    func startTimerWithNotification() {
+        Utilities.startTimer(timeout: 5) {
+            sendNotification(title: "Timer Finished", body: "5 seconds have passed")
         }
     }
 }
