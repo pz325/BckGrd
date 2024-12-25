@@ -10,11 +10,11 @@ import UserNotifications
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
+    var dailyQuoteTimer: Timer?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         requestNotificationPermission()
-        DailyQuote.scheduleDailyNotification()
     }
     
     private func setupStatusItem() {
@@ -23,6 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let showWindowItem = NSMenuItem(title: "Change", action: #selector(setRandomBackground), keyEquivalent: "c")
         menu.addItem(showWindowItem)
+        
+        let tongleTimerItem = NSMenuItem(title: "Repeat Daily Quote", action: #selector(toggleDailyQuoteTimer), keyEquivalent: "t")
+        tongleTimerItem.state = .off
+        menu.addItem(tongleTimerItem)
         
         menu.addItem(NSMenuItem.separator())
         
@@ -37,6 +41,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func setRandomBackground() {
         Utilities.setRandomBackground()
+    }
+    
+    @objc func toggleDailyQuoteTimer(_ sender: NSMenuItem) {
+        sender.state = sender.state == .on ? .off : .on
+        if dailyQuoteTimer == nil {
+            startDailyQuoteTimer()
+        } else {
+            stopDailyQuoteTimer()
+        }
+    }
+    
+    @objc func startDailyQuoteTimer() {
+        dailyQuoteTimer = Utilities.dispatchDailyQuoteNotificationRepeatedly()
+    }
+    
+    @objc func stopDailyQuoteTimer() {
+        dailyQuoteTimer?.invalidate()
+        dailyQuoteTimer = nil
     }
     
     private func requestNotificationPermission() {
