@@ -133,7 +133,6 @@ class Utilities {
 
         // Add timer to main run loop
         RunLoop.main.add(timer, forMode: .common)
-        
         return timer
     }
 }
