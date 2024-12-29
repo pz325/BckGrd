@@ -26,10 +26,6 @@ struct ContentView: View {
                 Utilities.dispatchDailyQuote()
             }
             
-            Button("Start Timer") {
-                startTimerWithNotification()
-            }
-            
             Button("随机改变桌面背景"){
                 Utilities.setRandomBackground()
             }
@@ -48,12 +44,6 @@ struct ContentView: View {
                         }
                     }
                 }
-    }
-    
-    func startTimerWithNotification() {
-        Utilities.startTimer(timeout: 5) {
-            Utilities.sendNotification(title: "Timer Finished", body: "5 seconds have passed")
-        }
     }
 }
 
